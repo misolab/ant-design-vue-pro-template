@@ -11,13 +11,13 @@
     <template v-slot:content>
       <span>{{ $t('pages.form.basicform.content') }}</span>
     </template>
-    <!-- 自定义 扩展信息 -->
+    <!-- 사용자 지정 확장 정보 -->
     <template v-slot:extra>
       <div><a-button>{{ $t('pages.form.basicform.headers.btn1') }}</a-button></div>
     </template>
     <div>
       <h3>Step Form</h3>
-      <p>隐藏页头后退按钮</p>
+      <p>헤더 뒤로 버튼 숨기기</p>
     </div>
   </page-container>
 </template>

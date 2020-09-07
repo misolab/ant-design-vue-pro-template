@@ -17,14 +17,14 @@ export default {
   name: 'RegisterResult',
   data () {
     return {
-      description: '激活邮件已发送到你的邮箱中，邮件有效期为24小时。请及时登录邮箱，点击邮件中的链接激活帐户。',
+      description: '인증 이메일이 사서함으로 전송되었으며 이메일은 24시간 동안 유효합니다. 시간안에 사서함에 로그인하고 이메일의 링크를 클릭하여 계정을 활성화하십시오.',
       form: {},
     }
   },
   computed: {
     email () {
       const v = this.form && this.form.email || 'xxx'
-      return `你的账户：${v} 注册成功`
+      return `당신의 계정：${v} 등록 성공`
     },
   },
   created () {

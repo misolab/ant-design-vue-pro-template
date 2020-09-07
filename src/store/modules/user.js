@@ -32,7 +32,7 @@ const user = {
   },
 
   actions: {
-    // 登录
+    // 로그인
     Login ({ commit }, userInfo) {
       return new Promise((resolve, reject) => {
         login(userInfo).then(response => {
@@ -47,7 +47,7 @@ const user = {
       })
     },
 
-    // 获取用户信息
+    // 사용자 정보 얻기
     GetInfo ({ commit }) {
       return new Promise((resolve, reject) => {
         getInfo().then(response => {
@@ -77,7 +77,7 @@ const user = {
       })
     },
 
-    // 登出
+    // 로그아웃
     Logout ({ commit, state }) {
       return new Promise((resolve) => {
         logout(state.token).then(() => {

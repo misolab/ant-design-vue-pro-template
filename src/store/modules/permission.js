@@ -1,7 +1,7 @@
 import { asyncRouterMap, constantRouterMap } from '@/config/router.config'
 
 /**
- * 过滤账户是否拥有某一个权限，并将菜单从加载列表移除
+ * 계정에 특정 권한이 있는지 여부를 필터링하고로드 목록에서 메뉴를 제거합니다.
  *
  * @param permission
  * @param route
@@ -22,7 +22,7 @@ function hasPermission (permission, route) {
 }
 
 /**
- * 单账户多角色时，使用该方法可过滤角色不存在的菜单
+ * 단일 계정에 여러 역할이있는 경우이 방법을 사용하여 역할이없는 메뉴를 필터링합니다
  *
  * @param roles
  * @param route

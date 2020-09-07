@@ -17,7 +17,7 @@ export default {
   name: 'WelcomePage',
   methods: {
     showLoading () {
-      this.$loading.show({ tip: '3 秒后自动隐藏' })
+      this.$loading.show({ tip: '3 초안에 자동 숨기기' })
 
       setTimeout(() => {
         this.$loading.hide()

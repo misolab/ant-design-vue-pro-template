@@ -23,14 +23,16 @@
 <script>
 import i18nMixin from '@/store/i18n-mixin'
 
-const locales = ['zh-CN', 'zh-TW', 'en-US', 'pt-BR']
+const locales = ['ko-KR', 'zh-CN', 'zh-TW', 'en-US', 'pt-BR']
 const languageLabels = {
+  'ko-KR': '한국어',
   'zh-CN': '简体中文',
   'zh-TW': '繁体中文',
   'en-US': 'English',
   'pt-BR': 'Português',
 }
 const languageIcons = {
+  'ko-KR': '🇰🇷',
   'zh-CN': '🇨🇳',
   'zh-TW': '🇭🇰',
   'en-US': '🇺🇸',

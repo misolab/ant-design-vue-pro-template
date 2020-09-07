@@ -4,18 +4,18 @@ import notification from 'ant-design-vue/es/notification'
 import { VueAxios } from './axios'
 import { ACCESS_TOKEN } from '@/store/mutation-types'
 
-// 创建 axios 实例
+// axios 인스턴스 만들기
 const request = axios.create({
-  // API 请求的默认前缀
+  // API 기본 경로
   baseURL: process.env.VUE_APP_API_BASE_URL,
-  timeout: 6000, // 请求超时时间
+  timeout: 6000, // 요청 시간 초과
 })
 
-// 异常拦截处理器
+// 예외 처리 핸들러
 const errorHandler = (error) => {
   if (error.response) {
     const data = error.response.data
-    // 从 localstorage 获取 token
+    // localstorage에서 토큰 가져 오기
     if (error.response.status === 403) {
       notification.error({
         message: 'Forbidden',
@@ -35,8 +35,8 @@ const errorHandler = (error) => {
 // request interceptor
 request.interceptors.request.use(config => {
   const token = storage.get(ACCESS_TOKEN)
-  // 如果 token 存在
-  // 让每个请求携带自定义 token 请根据实际情况自行修改
+  // 토큰이있는 경우
+  // 각 요청에 사용자 지정 토큰을 전달하고 실제 상황에 따라 수정하십시오
   if (token) {
     config.headers['Access-Token'] = token
   }
