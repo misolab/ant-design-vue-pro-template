@@ -11,7 +11,7 @@ IntelliJ IDEAPhpStormWebStorm
       console.log('PageHeader::@back')
     }"
     :back="() => {
-      // 自定义 back，不会覆盖 onBack 事件
+      // back 재정의 처리, onBack 이벤트를 재정의하지 않습니다
       console.log('PageHeader::.back')
     }"
   >
@@ -19,19 +19,19 @@ IntelliJ IDEAPhpStormWebStorm
       <span>{{ $t('pages.form.basicform.headers.customTitle') }}</span>
     </template>
     <template v-slot:tags>
-      <a-tag color="pink">标签1</a-tag>
-      <a-tag>标签2</a-tag>
+      <a-tag color="pink">라벨 1</a-tag>
+      <a-tag>라벨 2</a-tag>
     </template>
     <template v-slot:content>
       <span>{{ $t('pages.form.basicform.content') }}</span>
     </template>
-    <!-- 自定义 扩展信息 -->
+    <!-- 사용자 지정 확장 정보 -->
     <template v-slot:extra>
       <div><a-button>{{ $t('pages.form.basicform.headers.btn1') }}</a-button></div>
     </template>
     <div>
       <h3>Basic Form</h3>
-      <p>正常页头</p>
+      <p>일반 헤더</p>
     </div>
   </page-container>
 </template>

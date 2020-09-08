@@ -87,11 +87,11 @@ export default {
     }),
   },
   created () {
-    // bind router (绑定路由)
+    // bind router (바인딩 경로)
     const routes = this.mainMenu.find(item => item.path === '/')
     this.menus = (routes && routes.children) || []
 
-    // 处理侧栏收起状态
+    // 사이드 바 접힌 상태 처리
     this.$watch('collapsed', () => {
       this.$store.commit(SIDEBAR_TYPE, this.collapsed)
     })
@@ -138,7 +138,7 @@ export default {
       }
     },
     /**
-     * 同步和保存设置栏配置
+     * 설정 표시 줄 구성 동기화 및 저장
      * */
     handleSettingChange ({ type, value }) {
       console.log('type', type, value)

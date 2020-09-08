@@ -1,13 +1,13 @@
 <template>
   <div class="main user-layout-register">
-    <h3><span>注册</span></h3>
+    <h3><span>등록</span></h3>
     <a-form ref="formRegister" :form="form" id="formRegister">
       <a-form-item>
         <a-input
           size="large"
           type="text"
-          placeholder="邮箱"
-          v-decorator="['email', {rules: [{ required: true, type: 'email', message: '请输入邮箱地址' }], validateTrigger: ['change', 'blur']}]"
+          placeholder="이메일 주소"
+          v-decorator="['email', {rules: [{ required: true, type: 'email', message: '이메일 주소를 입력하세요' }], validateTrigger: ['change', 'blur']}]"
         />
       </a-form-item>
 
@@ -22,7 +22,7 @@
             <div :class="['user-register', passwordLevelClass]">强度：<span>{{ passwordLevelName }}</span></div>
             <a-progress :percent="state.percent" :show-info="false" :stroke-color=" passwordLevelColor " />
             <div style="margin-top: 10px;">
-              <span>请至少输入 6 个字符。请不要使用容易被猜到的密码。</span>
+              <span>6 자 이상 입력하십시오. 추측하기 쉬운 암호를 사용하지 마십시오.</span>
             </div>
           </div>
         </template>
@@ -30,8 +30,8 @@
           <a-input-password
             size="large"
             @click="handlePasswordInputClick"
-            placeholder="至少6位密码，区分大小写"
-            v-decorator="['password', {rules: [{ required: true, message: '至少6位密码，区分大小写'}, { validator: this.handlePasswordLevel }], validateTrigger: ['change', 'blur']}]"
+            placeholder="최소 6 자리 비밀번호, 대소 문자 구분"
+            v-decorator="['password', {rules: [{ required: true, message: '최소 6 자리 비밀번호, 대소 문자 구분'}, { validator: this.handlePasswordLevel }], validateTrigger: ['change', 'blur']}]"
           />
         </a-form-item>
       </a-popover>
@@ -39,13 +39,13 @@
       <a-form-item>
         <a-input-password
           size="large"
-          placeholder="确认密码"
-          v-decorator="['password2', {rules: [{ required: true, message: '至少6位密码，区分大小写' }, { validator: this.handlePasswordCheck }], validateTrigger: ['change', 'blur']}]"
+          placeholder="비밀번호 확인"
+          v-decorator="['password2', {rules: [{ required: true, message: '최소 6 자리 비밀번호, 대소 문자 구분' }, { validator: this.handlePasswordCheck }], validateTrigger: ['change', 'blur']}]"
         />
       </a-form-item>
 
       <a-form-item>
-        <a-input size="large" placeholder="11 位手机号" v-decorator="['mobile', {rules: [{ required: true, message: '请输入正确的手机号', pattern: /^1[3456789]\d{9}$/ }, { validator: this.handlePhoneCheck } ], validateTrigger: ['change', 'blur'] }]">
+        <a-input size="large" placeholder="11 전화번호" v-decorator="['mobile', {rules: [{ required: true, message: '유효한 전화 번호를 입력하세요', pattern: /^1[3456789]\d{9}$/ }, { validator: this.handlePhoneCheck } ], validateTrigger: ['change', 'blur'] }]">
           <a-select slot="addonBefore" size="large" default-value="+86">
             <a-select-option value="+86">+86</a-select-option>
             <a-select-option value="+87">+87</a-select-option>
@@ -63,7 +63,7 @@
       <a-row :gutter="16">
         <a-col class="gutter-row" :span="16">
           <a-form-item>
-            <a-input size="large" type="text" placeholder="验证码" v-decorator="['captcha', {rules: [{ required: true, message: '请输入验证码' }], validateTrigger: 'blur'}]">
+            <a-input size="large" type="text" placeholder="확인 코드" v-decorator="['captcha', {rules: [{ required: true, message: '인증 코드를 입력하세요' }], validateTrigger: 'blur'}]">
               <a-icon slot="prefix" type="mail" :style="{ color: 'rgba(0,0,0,.25)' }" />
             </a-input>
           </a-form-item>
@@ -74,7 +74,7 @@
             size="large"
             :disabled="state.smsSendBtn"
             @click.stop.prevent="getCaptcha"
-            v-text="!state.smsSendBtn && '获取验证码'||(state.time+' s')"
+            v-text="!state.smsSendBtn && '인증 코드 받기'||(state.time+' s')"
           />
         </a-col>
       </a-row>
@@ -91,7 +91,7 @@
         >
           注册
         </a-button>
-        <router-link class="login" :to="{ name: 'login' }">使用已有账户登录</router-link>
+        <router-link class="login" :to="{ name: 'login' }">기존 계정으로 로그인</router-link>
       </a-form-item>
     </a-form>
   </div>
@@ -102,10 +102,10 @@ import { getSmsCaptcha } from '@/api/auth/login'
 import { deviceMixin } from '@/store/device-mixin'
 
 const levelNames = {
-  0: '低',
-  1: '低',
-  2: '中',
-  3: '强',
+  0: '낮음',
+  1: '낮음',
+  2: '중간',
+  3: '강함',
 }
 const levelClass = {
   0: 'error',
@@ -154,15 +154,15 @@ export default {
     handlePasswordLevel (rule, value, callback) {
       let level = 0
 
-      // 判断这个字符串中有没有数字
+      // 이 문자열에 숫자가 있는지 확인
       if (/[0-9]/.test(value)) {
         level++
       }
-      // 判断字符串中有没有字母
+      // 문자열에 영문자가 있는지 확인
       if (/[a-zA-Z]/.test(value)) {
         level++
       }
-      // 判断字符串中有没有特殊符号
+      // 문자열에 특수 기호가 있는지 확인
       if (/[^0-9a-zA-Z_]/.test(value)) {
         level++
       }
@@ -177,7 +177,7 @@ export default {
         if (level === 0) {
           this.state.percent = 10
         }
-        callback(new Error('密码强度不够'))
+        callback(new Error('비밀번호가 충분히 강력하지 않습니다.'))
       }
     },
 
@@ -185,10 +185,10 @@ export default {
       const password = this.form.getFieldValue('password')
       console.log('value', value)
       if (value === undefined) {
-        callback(new Error('请输入密码'))
+        callback(new Error('비밀번호를 입력 해주세요'))
       }
       if (value && password && value.trim() !== password.trim()) {
-        callback(new Error('两次密码不一致'))
+        callback(new Error('두 암호가 일치하지 않습니다.'))
       }
       callback()
     },
@@ -236,13 +236,13 @@ export default {
               }
             }, 1000)
 
-            const hide = $message.loading('验证码发送中..', 0)
+            const hide = $message.loading('확인 코드 전송..', 0)
 
             getSmsCaptcha({ mobile: values.mobile }).then(res => {
               setTimeout(hide, 2500)
               $notification.success({
-                message: '提示',
-                description: '验证码获取成功，您的验证码为：' + res.result.captcha,
+                message: '확인',
+                description: '인증 코드를 성공적으로 획득했습니다. 인증 코드는 다음과 같습니다.' + res.result.captcha,
                 duration: 8,
               })
             }).catch(err => {
@@ -258,8 +258,8 @@ export default {
     },
     requestFailed (err) {
       this.$notification.error({
-        message: '错误',
-        description: ((err.response || {}).data || {}).message || '请求出现错误，请稍后再试',
+        message: '오류',
+        description: ((err.response || {}).data || {}).message || '요청에 오류가 있습니다. 나중에 다시 시도하십시오.',
         duration: 4,
       })
       this.registerBtn = false

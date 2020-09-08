@@ -2,15 +2,15 @@ import Vue from 'vue'
 import store from '@/store'
 
 /**
- * Action 权限指令
- * 指令用法：
- *  - 在需要控制 action 级别权限的组件上使用 v-action:[method] , 如下：
- *    <a-button v-action:add >添加用户</a-button>
- *    <a-button v-action:delete>删除用户</a-button>
- *    <a v-action:edit @click="edit(record)">修改</a>
+ * Action 허가 지시
+ * 지시 사용법：
+ *  - 다음과 같이 작업 수준 권한을 제어해야하는 구성 요소에 v-action:[method]을 사용해주세요
+ *    <a-button v-action:add >사용자 추가</a-button>
+ *    <a-button v-action:delete>사용자 삭제</a-button>
+ *    <a v-action:edit @click="edit(record)">수정</a>
  *
- *  - 当前用户没有权限时，组件上使用了该指令则会被隐藏
- *  - 当后台权限跟 pro 提供的模式不同时，只需要针对这里的权限过滤进行修改即可
+ *  - 현재 사용자에게 권한이없는 경우 명령을 사용하면 구성 요소가 숨겨집니다
+ *  - 백그라운드 권한이 pro에서 제공하는 모드와 다른 경우 여기에서 권한 필터링 만 수정하면됩니다.
  *
  *  @see https://github.com/vueComponent/ant-design-vue-pro/pull/53
  */

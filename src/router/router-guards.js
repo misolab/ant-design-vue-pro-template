@@ -26,8 +26,8 @@ router.beforeEach((to, from, next) => {
           const roles = res && res.role
           // generate dynamic router
           store.dispatch('GenerateRoutes', { roles }).then(() => {
-            // 根据roles权限生成可访问的路由表
-            // 动态添加可访问路由表
+            // 역할 권한을 기반으로 액세스 가능한 라우팅 테이블을 생성하고
+            // 액세스 가능한 라우팅 테이블을 동적으로 추가
             router.addRoutes(store.getters.addRouters)
             // 请求带有 redirect 重定向时，登录自动重定向到该地址
             const redirect = decodeURIComponent(from.query.redirect || to.path)
@@ -35,16 +35,16 @@ router.beforeEach((to, from, next) => {
               // set the replace: true so the navigation will not leave a history record
               next({ ...to, replace: true })
             } else {
-              // 跳转到目的路由
+              // 목적지 경로로 이동
               next({ path: redirect })
             }
           })
         }).catch(() => {
           notification.error({
-            message: '错误',
-            description: '请求用户信息失败，请重试',
+            message: '오류',
+            description: '사용자 정보를 요청하지 못했습니다. 다시 시도하십시오',
           })
-          // 失败时，获取用户信息失败时，调用登出，来清空历史保留信息
+          // 실패시 사용자 정보 획득 실패시 로그 아웃을 호출하여 이력 정보 삭제
           store.dispatch('Logout').then(() => {
             next({ path: loginRoutePath, query: { redirect: to.fullPath } })
           })
@@ -56,7 +56,7 @@ router.beforeEach((to, from, next) => {
   } else {
     // not login
     if (allowList.includes(to.name)) {
-      // 在免登录名单，直接进入
+      // 로규인이 필요 없는 경로로 이동
       next()
     } else {
       next({ path: loginRoutePath, query: { redirect: to.fullPath } })

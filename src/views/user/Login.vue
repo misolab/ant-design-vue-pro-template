@@ -12,16 +12,16 @@
         :tab-bar-style="{ textAlign: 'center', borderBottom: 'unset' }"
         @change="handleTabClick"
       >
-        <a-tab-pane key="tab1" tab="账号密码登录">
-          <a-alert v-if="isLoginError" type="error" show-icon style="margin-bottom: 24px;" message="账户或密码错误（admin/ant.design )" />
+        <a-tab-pane key="tab1" tab="아이디 비밀번호 로그인">
+          <a-alert v-if="isLoginError" type="error" show-icon style="margin-bottom: 24px;" message="잘못된 아이디 또는 비밀번호（admin/ant.design )" />
           <a-form-item>
             <a-input
               size="large"
               type="text"
-              placeholder="账户: admin"
+              placeholder="아이디: admin"
               v-decorator="[
                 'username',
-                {rules: [{ required: true, message: '请输入帐户名或邮箱地址' }, { validator: handleUsernameOrEmail }], validateTrigger: 'change'}
+                {rules: [{ required: true, message: '계정 이름 또는 이메일 주소를 입력하십시오' }, { validator: handleUsernameOrEmail }], validateTrigger: 'change'}
               ]"
             >
               <a-icon slot="prefix" type="user" :style="{ color: 'rgba(0,0,0,.25)' }" />
@@ -31,19 +31,19 @@
           <a-form-item>
             <a-input-password
               size="large"
-              placeholder="密码: admin or ant.design"
+              placeholder="비밀번호: admin or ant.design"
               v-decorator="[
                 'password',
-                {rules: [{ required: true, message: '请输入密码' }], validateTrigger: 'blur'}
+                {rules: [{ required: true, message: '비밀번호를 입력 해주세요' }], validateTrigger: 'blur'}
               ]"
             >
               <a-icon slot="prefix" type="lock" :style="{ color: 'rgba(0,0,0,.25)' }" />
             </a-input-password>
           </a-form-item>
         </a-tab-pane>
-        <a-tab-pane key="tab2" tab="手机号登录">
+        <a-tab-pane key="tab2" tab="휴대폰 번호 로그인">
           <a-form-item>
-            <a-input size="large" type="text" placeholder="手机号" v-decorator="['mobile', {rules: [{ required: true, pattern: /^1[34578]\d{9}$/, message: '请输入正确的手机号' }], validateTrigger: 'change'}]">
+            <a-input size="large" type="text" placeholder="전화 번호" v-decorator="['mobile', {rules: [{ required: true, pattern: /^1[34578]\d{9}$/, message: '정확한 전화번호를 입력하세요' }], validateTrigger: 'change'}]">
               <a-icon slot="prefix" type="mobile" :style="{ color: 'rgba(0,0,0,.25)' }" />
             </a-input>
           </a-form-item>
@@ -51,7 +51,7 @@
           <a-row :gutter="16">
             <a-col class="gutter-row" :span="16">
               <a-form-item>
-                <a-input size="large" type="text" placeholder="验证码" v-decorator="['captcha', {rules: [{ required: true, message: '请输入验证码' }], validateTrigger: 'blur'}]">
+                <a-input size="large" type="text" placeholder="확인 코드" v-decorator="['captcha', {rules: [{ required: true, message: '인증 코드를 입력하세요' }], validateTrigger: 'blur'}]">
                   <a-icon slot="prefix" type="mail" :style="{ color: 'rgba(0,0,0,.25)' }" />
                 </a-input>
               </a-form-item>
@@ -62,7 +62,7 @@
                 tabindex="-1"
                 :disabled="state.smsSendBtn"
                 @click.stop.prevent="getCaptcha"
-                v-text="!state.smsSendBtn && '获取验证码' || (state.time+' s')"
+                v-text="!state.smsSendBtn && '인증 코드 받기' || (state.time+' s')"
               />
             </a-col>
           </a-row>
@@ -70,13 +70,13 @@
       </a-tabs>
 
       <a-form-item>
-        <a-checkbox v-decorator="['rememberMe', { valuePropName: 'checked' }]">自动登录</a-checkbox>
+        <a-checkbox v-decorator="['rememberMe', { valuePropName: 'checked' }]">자동 로그인</a-checkbox>
         <router-link
           :to="{ name: 'recover', params: { user: 'aaa'} }"
           class="forge-password"
           style="float: right;"
         >
-          忘记密码
+          비밀번호 분실
         </router-link>
       </a-form-item>
 
@@ -88,12 +88,12 @@
           class="login-button"
           :loading="state.loginBtn"
         >
-          确定
+          결정
         </a-button>
       </a-form-item>
 
       <div class="user-login-other">
-        <span>其他登录方式</span>
+        <span>기타 로그인 방법</span>
         <a>
           <a-icon class="item-icon" type="alipay-circle" />
         </a>
@@ -103,7 +103,7 @@
         <a>
           <a-icon class="item-icon" type="weibo-circle" />
         </a>
-        <router-link class="register" :to="{ name: 'register' }">注册账户</router-link>
+        <router-link class="register" :to="{ name: 'register' }">계정 등록</router-link>
       </div>
     </a-form>
   </div>
@@ -200,12 +200,12 @@ export default {
             }
           }, 1000)
 
-          const hide = this.$message.loading('验证码发送中..', 0)
+          const hide = this.$message.loading('확인 코드 전송..', 0)
           getSmsCaptcha({ mobile: values.mobile }).then(res => {
             setTimeout(hide, 2500)
             this.$notification.success({
-              message: '提示',
-              description: '验证码获取成功，您的验证码为：' + res.result.captcha,
+              message: '성공',
+              description: '인증 코드를 성공적으로 획득했습니다. 인증 코드는 다음과 같습니다.' + res.result.captcha,
               duration: 8,
             })
           }).catch(err => {
@@ -241,11 +241,11 @@ export default {
       })
       */
       this.$router.push({ path: '/' })
-      // 延迟 1 秒显示欢迎信息
+      // 메시지 1초 동안 표시
       setTimeout(() => {
         this.$notification.success({
-          message: '欢迎',
-          description: '欢迎回来',
+          message: '안녕하세요',
+          description: '다시 오신 것을 환영합니다',
         })
       }, 1000)
       this.isLoginError = false
@@ -253,8 +253,8 @@ export default {
     requestFailed (err) {
       this.isLoginError = true
       this.$notification.error({
-        message: '错误',
-        description: ((err.response || {}).data || {}).message || '请求出现错误，请稍后再试',
+        message: '오류',
+        description: ((err.response || {}).data || {}).message || '요청에 오류가 있습니다. 나중에 다시 시도하십시오.',
         duration: 4,
       })
     },

@@ -17,9 +17,9 @@
 
       <div class="footer">
         <div class="links">
-          <a href="_self">帮助</a>
-          <a href="_self">隐私</a>
-          <a href="_self">条款</a>
+          <a href="_self">도움말</a>
+          <a href="_self">프라이버시</a>
+          <a href="_self">조항</a>
         </div>
         <div class="copyright">
           Copyright &copy; 2018 vueComponent
